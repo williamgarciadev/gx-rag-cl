@@ -13,7 +13,7 @@ Repo de referencia (solo lectura, NO copiar código): `~/referencia/knowledge-ra
 
 ## Estado actual
 
-No existe código fuente todavía: no hay `src/`, `pyproject.toml` ni entorno Python creados. La iteración activa es **Fase 1: caracterización del corpus** (ver `gx-bt-rag-punto-de-partida-desarrollo.md`), no el esqueleto del servidor MCP. Progreso real en `docs/caracterizacion-corpus.md`: una fuente confirmada con evidencia (Modelo de Datos Bantotal), las cuatro fuentes oficiales de Fase 1 (Manual Instalador, Manual de Usuario, Wiki, XPZ) siguen pendientes de archivos reales. Esta sesión no tiene salida de red hacia `docs.genexus.com`/`wiki.genexus.com` (bloqueo de política de egress, no de la wiki).
+No existe código fuente todavía: no hay `src/`, `pyproject.toml` ni entorno Python creados. La iteración activa es **Fase 1: caracterización del corpus** (ver `gx-bt-rag-punto-de-partida-desarrollo.md`), no el esqueleto del servidor MCP. Progreso real en `docs/caracterizacion-corpus.md`: dos fuentes confirmadas con evidencia (Modelo de Datos Bantotal, Referencias Rápidas Bantotal), las cuatro fuentes oficiales de Fase 1 (Manual Instalador, Manual de Usuario, Wiki, XPZ) siguen pendientes de archivos reales. Esta sesión no tiene salida de red hacia `docs.genexus.com`/`wiki.genexus.com`/`docs.workwithplus.com` (bloqueo de política de egress, no de los sitios). Hay una decisión de sensibilidad de datos pendiente con el humano (§3.5 del documento de hallazgos) antes de curar la fuente "Referencias Rápidas".
 
 ## Comandos
 
