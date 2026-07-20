@@ -11,7 +11,7 @@ Entregable de la Fase 1 (`docs/gx-bt-rag-fase1-caracterizacion-corpus.md` §8). 
 | Wiki GeneXus (2 artículos de prueba) | 🟡 Bloqueada | Esta sesión no tiene salida de red permitida hacia `docs.genexus.com`/`wiki.genexus.com` (ver §5). Usuario subirá el HTML local de las dos páginas de prueba. |
 | XPZ de la KB | 🔴 Pendiente | No hay ningún `.xpz` en este entorno. Usuario lo subirá. Herramientas de parseo ya listas (ver §6). |
 | **Modelo de Datos Bantotal (MDU-99000)** | 🟢 Confirmada | Fuente real disponible en este entorno (skill `bantotal-model-docs`), caracterizada en §2. No es una de las cuatro fuentes oficiales de Fase 1, pero alimenta las mismas dos capas (catálogo + `cross_ref`) y aporta evidencia real para la tabla de prefijos. |
-| **Referencias Rápidas Bantotal (documento interno del usuario)** | 🟢 Confirmada | Subido por el usuario a esta sesión (`Bantotal_Rapidas.md`, generado desde `Rapidas_2.txt`). No es una de las cuatro fuentes oficiales, pero es evidencia real de producción (SQL Server) — caracterizada en §3. Contiene datos operativos sensibles; ver nota de sensibilidad en §3.5. |
+| **Referencias Rápidas Bantotal (documento interno del usuario)** | 🟢 Confirmada + curada | Subido por el usuario a esta sesión (`Bantotal_Rapidas.md`, generado desde `Rapidas_2.txt`). No es una de las cuatro fuentes oficiales, pero es evidencia real de producción (SQL Server) — caracterizada en §3. Contenía datos operativos sensibles, redactados en el primer artefacto curado: `corpus/curated/bantotal-rapidas.md` (ver §3.5). |
 
 El gate de Fase 1 (cuatro fuentes oficiales caracterizadas) **no está cerrado**. Este documento registra el progreso posible con lo que hay disponible ahora mismo, sin inventar nada de lo pendiente.
 
@@ -93,15 +93,11 @@ Cada bloque `JOIN` del documento es, literalmente, una relación `cross_ref` ya 
 - `XWFD01/02/05/06/07/08/09` (documentos ↔ versiones ↔ instancias ↔ personas ↔ cuentas ↔ operación — Carpeta Digital)
 - `BTI004 ↔ BTI012 ↔ BTI014 ↔ BTI019 ↔ BTI025/026` (servicio → canal → método → parámetros → SDT — Servicios Web Bantotal)
 
-### 3.5 Nota de sensibilidad — a decidir con el humano, no se cierra sola
+### 3.5 Nota de sensibilidad — resuelta con el humano
 
-**Hallazgo que hay que traer al usuario, no una fuente más para catalogar sin más.** El documento mezcla, en las secciones narrativas (ACH §14, Corresponsal §25, y varios ejemplos de `SELECT`/`UPDATE` con filtros literales), **datos operativos que parecen reales**: IPs internas, una URL interna con hostname, nombres de personas (compañeros de operaciones citados por nombre de pila), y números de documento/cuenta usados como valores de filtro en los ejemplos SQL. Ninguno de esos valores se reproduce en este documento de caracterización ni se copiará al repo.
+El documento mezclaba, en las secciones narrativas (ACH §14, Corresponsal §25, y varios ejemplos de `SELECT`/`UPDATE` con filtros literales), **datos operativos que parecían reales**: IPs internas, una URL interna con hostname, nombres de personas (compañeros de operaciones citados por nombre de pila), y números de documento/cuenta usados como valores de filtro en los ejemplos SQL.
 
-Esto no es solo un detalle de curación — condiciona cómo se debe tratar esta fuente en el flujo de curación asistida (`docs/gx-bt-rag-fase1-caracterizacion-corpus.md` §5): antes de que cualquier parte de este documento entre a un artefacto Markdown curado o al catálogo, hay que decidir con el humano si:
-1. Se cura conservando solo la estructura (nombres de tabla, joins, catálogos de programas, tablas código→significado) y se **descartan** los procedimientos narrados con datos operativos específicos, o
-2. Se cura completo pero con esos valores **redactados/anonimizados** antes de convertir a artefacto versionado.
-
-No se asume ninguna de las dos — se deja igual que las demás decisiones abiertas de `docs/gx-bt-rag-punto-de-partida-desarrollo.md` §4: se plantea, no se cierra sola.
+**Decisión del humano (2026-07-20):** redactar esos valores y conservar el resto del documento íntegro (no descartar los procedimientos narrados). Aplicado en el primer artefacto curado de esta fuente: **`corpus/curated/bantotal-rapidas.md`** — mismo contenido y estructura que el original, con los valores sensibles reemplazados por placeholders (`<NRO_DOCUMENTO>`, `<NRO_CUENTA>`, `<NRO_OPERACION>`, `[contacto de negocio]`, `[URL interna de ...]`) y una nota de curación al inicio que documenta exactamente qué se redactó y por qué (trazabilidad, `docs/gx-bt-rag-fase1-caracterizacion-corpus.md` §5.4). Verificado que ningún valor sensible original quedó en el artefacto ni en este documento de caracterización antes de commitear.
 
 ---
 
@@ -179,6 +175,6 @@ No se han copiado al repo (siguen siendo activos de skill), pero quedan identifi
 2. Usuario sube el Manual de Usuario (PDF) → caracterizar como fuente funcional (semántica de negocio, transacciones por módulo).
 3. Usuario sube el Manual Instalador (PDF, 334p) → re-validar con evidencia real las filas `HCDT`/`PCDT`/`PNU`/`PDP`/`PRTE`/`HZ`/`HW`/`HCVC` de la tabla de §4, hoy corroboradas solo parcialmente por una fuente distinta.
 4. Usuario sube uno o más `.xpz` de la KB → caracterizar como fuente de firmas propias (§3 de `gx-bt-rag-fase1-caracterizacion-corpus.md`), correr `parse_xpz.py` / `xpz_parser.py`, y confirmar/descartar el prefijo `GIK`.
-5. **Decisión humana pendiente (§3.5):** qué hacer con los datos operativos sensibles de "Referencias Rápidas Bantotal" antes de curarlo — descartar los procedimientos narrados o redactar los valores específicos. No se avanza a producir un artefacto curado de esta fuente hasta resolverlo.
+5. ~~Decisión humana pendiente: qué hacer con los datos operativos sensibles de "Referencias Rápidas Bantotal" antes de curarlo.~~ **Resuelta (§3.5):** redactar y conservar todo. Primer artefacto curado producido en `corpus/curated/bantotal-rapidas.md`.
 
 El gate de Fase 1 (`docs/gx-bt-rag-fase1-caracterizacion-corpus.md` §8) se da por cumplido solo cuando los puntos 1–4 estén cerrados con evidencia real.
