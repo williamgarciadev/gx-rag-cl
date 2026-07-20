@@ -2,10 +2,10 @@
 
 MCP server de retrieval semántico puro (sin LLM propio) sobre documentación de GeneXus y Bantotal, con una capa de validación estructurada que verifica sintaxis y firmas contra un catálogo SQLite.
 
-Especificación completa: @gx-bt-rag-mcp-stack.md
-Caracterización del corpus (Fase 1): @gx-bt-rag-fase1-caracterizacion-corpus.md
-Punto de partida de esta iteración de desarrollo: @gx-bt-rag-punto-de-partida-desarrollo.md
-UI de gestión del corpus (fase posterior): @gx-bt-rag-ui-gestion-corpus.md
+Especificación completa: @docs/gx-bt-rag-mcp-stack.md
+Caracterización del corpus (Fase 1): @docs/gx-bt-rag-fase1-caracterizacion-corpus.md
+Punto de partida de esta iteración de desarrollo: @docs/gx-bt-rag-punto-de-partida-desarrollo.md
+UI de gestión del corpus (fase posterior): @docs/gx-bt-rag-ui-gestion-corpus.md
 Repo de referencia (solo lectura, NO copiar código): `~/referencia/knowledge-rag`
 
 <!-- Este archivo son reglas operativas, no documentación. El porqué de cada decisión está en el spec. Mantener bajo ~200 líneas. -->
